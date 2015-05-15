@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Interval Ear Training</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="unison">Unison</string>
+    <string name="minor2">Minor 2nd</string>
+    <string name="major2">Major 2nd</string>
+    <string name="minor3">Minor 3rd</string>
+    <string name="major3">Major 3rd</string>
+    <string name="perfect4">Perfect 4th</string>
+    <string name="tritone">Tritone</string>
+    <string name="perfect5">Perfect 5yj</string>
+    <string name="minor6">Minor 6th</string>
+    <string name="major6">Major 6th</string>
+    <string name="minor7">Minor 7th</string>
+    <string name="major7">Major 7th</string>
+    <string name="octave">Octave</string>
+    <string name="revealAns">Reveal Answer</string>
+
+</resources>
