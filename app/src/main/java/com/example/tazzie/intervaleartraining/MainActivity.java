@@ -1,166 +1,204 @@
 package com.example.tazzie.intervaleartraining;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.HashMap;
 
 public class MainActivity extends ActionBarActivity {
-    private TextView score, result;
+    private TextView title_page, score, result;
     private ProgressBar sound_progress;
     private Button sound_button, unison_button, minor2_button, major2_button,
             minor3_button, major3_button, perfect4_button,
             perfect5_button, minor6_button, major6_button, minor7_button,
-            major_7button, octave_button, rev_ans_button;
+            major7_button, octave_button, rev_ans_button;
+    private Context context;
+    private HashMap<MediaPlayer, String> mPlayerHash;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
-
-
-        setMajor2_button(major2_button);
         setContentView(R.layout.activity_main);
+
+//        NumberPicker np1 = (NumberPicker) findViewById(R.id.numberPicker);
+//        String[] num = new String[6];
+//        for(int i=0; i<6; i++)
+//            num[i] = Integer.toString(i + 1);
+//
+//        np1.setMinValue(1);
+//        np1.setMaxValue(6);
+//        np1.setWrapSelectorWheel(true);
+//        np1.setDisplayedValues(num);
+//        np1.setValue(1);
+        setButtonsVisible(5);
     }
 
-    public TextView getScore() {
-        return score;
-    }
 
-    public void setScore(TextView score) {
-        this.score = score;
-    }
+    private void setButtonsVisible(int level){
+        /*
+        * lv1: Perfect 4th
+        *      Perfect 5th
+        *      Unison
+        *
+        * lv2: Major 2nd
+        *      Major 3rd
+        *
+        * lv3: Major 6th
+        *      Major 7th
+        *      Octave
+        *
+        * lv4: Minor 2nd
+        *      Minor 3rd
+        *
+        * lv5: Minor 6th
+        *      Minor 7th
+        *      Augmented 4th(Tritone)
+        * */
 
-    public TextView getResult() {
-        return result;
-    }
+        Button sound_button = (Button) findViewById(R.id.sound_button);
 
-    public void setResult(TextView result) {
-        this.result = result;
-    }
+        if(level >= 1){
+            unison_button = (Button) findViewById(R.id.unison_button);
+            unison_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_unison = MediaPlayer.create(this, R.raw.c_unison);
+            unison_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_unison.start();
+                }
+            });
 
-    public ProgressBar getSound_progress() {
-        return sound_progress;
-    }
+            // Change id of this button in the xml file to perfect4_button
+            perfect4_button = (Button) findViewById(R.id.perfect4_button);
+            perfect4_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_perfect4 = MediaPlayer.create(this, R.raw.c_perfect4);
+            perfect4_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_perfect4.start();
+                }
+            });
 
-    public void setSound_progress(ProgressBar sound_progress) {
-        this.sound_progress = sound_progress;
-    }
+            perfect5_button = (Button) findViewById(R.id.perfect5_button);
+            perfect5_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_perfect5 = MediaPlayer.create(this, R.raw.c_perfect5);
+            perfect5_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_perfect5.start();
+                }
+            });
+        }
 
-    public Button getSound_button() {
-        return sound_button;
-    }
+        if(level >= 2){
+            major2_button = (Button) findViewById(R.id.major2_button);
+            major2_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_major2 = MediaPlayer.create(this, R.raw.c_major2);
+            major2_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_major2.start();
+                }
+            });
 
-    public void setSound_button(Button sound_button) {
-        this.sound_button = sound_button;
-    }
+            major3_button = (Button) findViewById(R.id.major3_button);
+            major3_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_major3 = MediaPlayer.create(this, R.raw.c_major3);
+            major3_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_major3.start();
+                }
+            });
+        }
 
-    public Button getUnison_button() {
-        return unison_button;
-    }
+        if(level >= 3){
+            major6_button = (Button) findViewById(R.id.major6_button);
+            major6_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_major6 = MediaPlayer.create(this, R.raw.c_major6);
+            major6_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_major6.start();
+                }
+            });
 
-    public void setUnison_button(Button unison_button) {
-        this.unison_button = unison_button;
-    }
+            major7_button = (Button) findViewById(R.id.major7_button);
+            major7_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_major7 = MediaPlayer.create(this, R.raw.c_major7);
+            major7_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_major7.start();
+                }
+            });
 
-    public Button getMinor2_button() {
-        return minor2_button;
-    }
+            octave_button = (Button) findViewById(R.id.octave_button);
+            octave_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_octave = MediaPlayer.create(this, R.raw.c_octave);
+            octave_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_octave.start();
+                }
+            });
+        }
 
-    public void setMinor2_button(Button minor2_button) {
-        this.minor2_button = minor2_button;
-    }
+        if(level >= 4){
+            minor2_button = (Button) findViewById(R.id.minor2_button);
+            minor2_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_minor2 = MediaPlayer.create(this, R.raw.c_minor2);
+            minor2_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_minor2.start();
+                }
+            });
 
-    public Button getMajor2_button() {
-        return major2_button;
-    }
+            minor3_button = (Button) findViewById(R.id.minor3_button);
+            minor3_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_minor3 = MediaPlayer.create(this, R.raw.c_minor3);
+            minor3_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_minor3.start();
+                }
+            });
+        }
 
-    public void setMajor2_button(Button major2_button) {
-        this.major2_button = major2_button;
-    }
+        if(level >= 5){
+            minor6_button = (Button) findViewById(R.id.minor6_button);
+            minor6_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_minor6 = MediaPlayer.create(this, R.raw.c_minor6);
+            minor6_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_minor6.start();
+                }
+            });
 
-    public Button getMinor3_button() {
-        return minor3_button;
-    }
-
-    public void setMinor3_button(Button minor3_button) {
-        this.minor3_button = minor3_button;
-    }
-
-    public Button getMajor3_button() {
-        return major3_button;
-    }
-
-    public void setMajor3_button(Button major3_button) {
-        this.major3_button = major3_button;
-    }
-
-    public Button getPerfect4_button() {
-        return perfect4_button;
-    }
-
-    public void setPerfect4_button(Button perfect4_button) {
-        this.perfect4_button = perfect4_button;
-    }
-
-    public Button getPerfect5_button() {
-        return perfect5_button;
-    }
-
-    public void setPerfect5_button(Button perfect5_button) {
-        this.perfect5_button = perfect5_button;
-    }
-
-    public Button getMinor6_button() {
-        return minor6_button;
-    }
-
-    public void setMinor6_button(Button minor6_button) {
-        this.minor6_button = minor6_button;
-    }
-
-    public Button getMajor6_button() {
-        return major6_button;
-    }
-
-    public void setMajor6_button(Button major6_button) {
-        this.major6_button = major6_button;
-    }
-
-    public Button getMinor7_button() {
-        return minor7_button;
-    }
-
-    public void setMinor7_button(Button minor7_button) {
-        this.minor7_button = minor7_button;
-    }
-
-    public Button getMajor_7button() {
-        return major_7button;
-    }
-
-    public void setMajor_7button(Button major_7button) {
-        this.major_7button = major_7button;
-    }
-
-    public Button getOctave_button() {
-        return octave_button;
-    }
-
-    public void setOctave_button(Button octave_button) {
-        this.octave_button = octave_button;
-    }
-
-    public Button getRev_ans_button() {
-        return rev_ans_button;
-    }
-
-    public void setRev_ans_button(Button rev_ans_button) {
-        this.rev_ans_button = rev_ans_button;
+            minor7_button = (Button) findViewById(R.id.minor7_button);
+            minor7_button.setVisibility(View.VISIBLE);
+            final MediaPlayer mPlayer_minor7 = MediaPlayer.create(this, R.raw.c_minor7);
+            minor7_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mPlayer_minor7.start();
+                }
+            });
+        }
     }
 
     @Override

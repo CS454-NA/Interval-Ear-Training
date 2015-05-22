@@ -19,4 +19,8 @@
     <string name="octave">Octave</string>
     <string name="revealAns">Reveal Answer</string>
 
+    <string name="button_1">Start</string>
+    <string name="button_2">Practice</string>
+    <string name="button_3">Song List</string>
+
 </resources>
