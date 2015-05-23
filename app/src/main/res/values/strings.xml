@@ -11,7 +11,7 @@
     <string name="major3">Major 3rd</string>
     <string name="perfect4">Perfect 4th</string>
     <string name="tritone">Tritone</string>
-    <string name="perfect5">Perfect 5yj</string>
+    <string name="perfect5">Perfect 5th</string>
     <string name="minor6">Minor 6th</string>
     <string name="major6">Major 6th</string>
     <string name="minor7">Minor 7th</string>
@@ -22,5 +22,6 @@
     <string name="button_1">Start</string>
     <string name="button_2">Practice</string>
     <string name="button_3">Song List</string>
+    <string name="level_button">Change Difficulty</string>
 
 </resources>
