@@ -75,73 +75,85 @@
                 style="@style/CustomButton"
                 android:text="@string/unison"
                 android:id="@+id/unison_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/octave"
                 android:id="@+id/octave_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/minor2"
                 android:id="@+id/minor2_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/major2"
                 android:id="@+id/major2_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/minor3"
                 android:id="@+id/minor3_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/major3"
                 android:id="@+id/major3_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/perfect4"
                 android:id="@+id/perfect4_button"
+                android:visibility="visible" />
+
+            <Button
+                style="@style/CustomButton"
+                android:text=""
+                android:id="@+id/blank_button"
                 android:visibility="invisible" />
+
+            <Button
+                style="@style/CustomButton"
+                android:text="@string/tritone"
+                android:id="@+id/tritone_button"
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/perfect5"
                 android:id="@+id/perfect5_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/minor6"
                 android:id="@+id/minor6_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/major6"
                 android:id="@+id/major6_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/minor7"
                 android:id="@+id/minor7_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
 
             <Button
                 style="@style/CustomButton"
                 android:text="@string/major7"
                 android:id="@+id/major7_button"
-                android:visibility="invisible" />
+                android:visibility="visible" />
         </GridLayout>
     </RelativeLayout>
 
