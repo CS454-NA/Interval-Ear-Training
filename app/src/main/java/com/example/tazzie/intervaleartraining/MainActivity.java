@@ -17,6 +17,7 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity implements NumberPicker.OnValueChangeListener{
     private Button start_button;
     private int level;
+    private int round_num, correct_num, attempt_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,29 @@ public class MainActivity extends ActionBarActivity implements NumberPicker.OnVa
         np1.setDisplayedValues(num);
         np1.setOnValueChangedListener(this);
 
+        try{
+            Intent intent = getIntent();
+            level = intent.getIntExtra("level", 1);
+            round_num = intent.getIntExtra("round_num", 1);
+            correct_num = intent.getIntExtra("correct_num", 0);
+            attempt_num = intent.getIntExtra("attempt_num", 0);
+        }
+        catch(Exception e){
+            level = 1;
+            round_num = 1;
+            correct_num = 0;
+            attempt_num = 0;
+        }
+
         start_button = (Button) findViewById(R.id.start_button);
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,GameActivity.class);
                 intent.putExtra("level", level);
+                intent.putExtra("attempt_num", attempt_num);
+                intent.putExtra("correct_num", correct_num);
+                intent.putExtra("round_num", round_num);
                 // prevents new stacks of activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
