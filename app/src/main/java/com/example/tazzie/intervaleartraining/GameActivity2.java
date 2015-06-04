@@ -1,9 +1,7 @@
 //package com.example.tazzie.intervaleartraining;
 //
-//import android.app.ProgressDialog;
 //import android.content.Context;
 //import android.content.Intent;
-//import android.graphics.Color;
 //import android.media.MediaPlayer;
 //import android.support.v7.app.ActionBarActivity;
 //import android.os.Bundle;
@@ -19,7 +17,7 @@
 //import java.util.Random;
 //
 //public class GameActivity extends ActionBarActivity {
-//    private TextView title_page, scoreText, result;
+//    private TextView title_page, roundTextView, scoreTextView;
 //    private ProgressBar sound_progress;
 //    private Button sound_button, unison_button, minor2_button, major2_button,
 //            minor3_button, major3_button, perfect4_button, tritone_button,
@@ -32,7 +30,7 @@
 //    private HashMap<Integer, String> buttonTextHash;
 //    private MediaPlayer mPlayerNote1, mPlayerNote2;
 //    private final int max_interval = 13;
-//    private int answer_value, round_number, correct_num, attempt_num;
+//    private int answer_value, round_num, correct_num, attempt_num;
 //    private boolean[] available_interval = new boolean[max_interval];
 //
 //    @Override
@@ -47,19 +45,31 @@
 //        setContentView(R.layout.game_layout);
 //        try{
 //            Intent intent = getIntent();
-//            level = intent.getIntExtra("level", 0);
-//
+//            level = intent.getIntExtra("level", 1);
+//            round_num = intent.getIntExtra("round_num", 1);
+//            correct_num = intent.getIntExtra("correct_num", 0);
+//            attempt_num = intent.getIntExtra("attempt_num", 0);
 //        }
 //        catch(Exception e){
 //            level = 1;
+//            round_num = 1;
+//            correct_num = 0;
+//            attempt_num = 0;
 //        }
 //        Toast.makeText(getApplicationContext(), level+" GAMEACTIVITY", Toast.LENGTH_LONG).show();
+//        roundTextView = (TextView) findViewById(R.id.round);
+//        roundTextView.setText("Round " + round_num);
+//        scoreTextView = (TextView) findViewById(R.id.score);
+//        scoreTextView.setText("Score: " + correct_num + " / " + attempt_num);
 //        sound_progress = (ProgressBar) findViewById(R.id.sound_progress);
 //        level_button = (Button) findViewById(R.id.level_button);
 //        level_button.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                Intent intent = new Intent(GameActivity.this, MainActivity.class);
+//                intent.putExtra("attempt_num", attempt_num);
+//                intent.putExtra("correct_num", correct_num);
+//                intent.putExtra("round_num", round_num);
 //                // prevents new stacks of activity
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 //                startActivity(intent);
@@ -256,6 +266,8 @@
 //            @Override
 //            public void onClick(View v) {
 //                Toast.makeText(getApplicationContext(), buttonTextHash.get(answer_value), Toast.LENGTH_LONG).show();
+//                processWrongAnswer();
+//                processNextRound();
 //            }
 //        });
 //        if(level >= 0){
@@ -431,13 +443,29 @@
 //    public void checkAnswer(int button_value, Button button){
 //        if (button_value == answer_value) {
 //            Toast.makeText(getApplicationContext(), "Correct!!", Toast.LENGTH_LONG).show();
+//            processCorrectAnswer();
 //        }
 //        else {
 //            Toast.makeText(getApplicationContext(), "WRONG!!!!", Toast.LENGTH_LONG).show();
+//            processWrongAnswer();
 ////            int wrongAnswer = getResources().getColor(R.color.wrong_answer);
 ////            button.setBackgroundColor(wrongAnswer);
 //        }
 ////        findAnswerButton();
+//    }
+//
+//    public void processCorrectAnswer(){
+//        scoreTextView.setText("Score: " + ++correct_num + " / " + ++attempt_num);
+//        processNextRound();
+//    }
+//
+//    public void processWrongAnswer(){
+//        scoreTextView.setText("Score: " + correct_num + " / " + ++attempt_num);
+//    }
+//
+//    public void processNextRound(){
+//        roundTextView.setText("Round " + ++round_num);
+//        generateInterval();
 //    }
 //
 //    public void findAnswerButton(){
