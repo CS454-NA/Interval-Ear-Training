@@ -52,12 +52,6 @@
             android:id="@+id/sound_button"
             android:layout_gravity="center_horizontal"
             />
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:id="@+id/sound_progress"
-            />
     </LinearLayout>
 
     <RelativeLayout
@@ -119,6 +113,12 @@
                 style="@style/CustomButton"
                 android:text="@string/perfect5"
                 android:id="@+id/perfect5_button"
+                />
+
+            <Button
+                style="@style/CustomButton"
+                android:text="@string/tritone"
+                android:id="@+id/tritone_button"
                 />
 
             <Button

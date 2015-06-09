@@ -2,6 +2,8 @@ package com.example.tazzie.intervaleartraining;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,7 +20,6 @@ import java.util.Random;
 
 public class GameActivity extends ActionBarActivity {
     private TextView title_page, roundTextView, scoreTextView;
-    private ProgressBar sound_progress;
     private Button sound_button, unison_button, minor2_button, major2_button,
             minor3_button, major3_button, perfect4_button, tritone_button,
             perfect5_button, minor6_button, major6_button, minor7_button,
@@ -32,6 +33,7 @@ public class GameActivity extends ActionBarActivity {
     private final int max_interval = 13;
     private int answer_value, round_num, correct_num, attempt_num;
     private boolean[] available_interval = new boolean[max_interval];
+    private boolean reveal_clicked = false;
 
     @Override
     protected void onPause() {
@@ -46,13 +48,13 @@ public class GameActivity extends ActionBarActivity {
         try{
             Intent intent = getIntent();
             level = intent.getIntExtra("level", 1);
-            round_num = intent.getIntExtra("round_num", 1);
+            round_num = intent.getIntExtra("round_num", 0);
             correct_num = intent.getIntExtra("correct_num", 0);
             attempt_num = intent.getIntExtra("attempt_num", 0);
         }
         catch(Exception e){
             level = 1;
-            round_num = 1;
+            round_num = 0;
             correct_num = 0;
             attempt_num = 0;
         }
@@ -61,7 +63,6 @@ public class GameActivity extends ActionBarActivity {
         roundTextView.setText("Round " + round_num);
         scoreTextView = (TextView) findViewById(R.id.score);
         scoreTextView.setText("Score: " + correct_num + " / " + attempt_num);
-        sound_progress = (ProgressBar) findViewById(R.id.sound_progress);
         level_button = (Button) findViewById(R.id.level_button);
         level_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,78 +77,42 @@ public class GameActivity extends ActionBarActivity {
             }
         });
         hashSounds();
-        hashButtons();
-        hashButtonTexts();
         setButtonsVisible(level);
         generateInterval();
+        hashButtons();
+        hashButtonTexts();
+        processNextRound();
         sound_button = (Button) findViewById(R.id.sound_button);
-        sound_progress.setIndeterminate(true);
-
         sound_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPlayerNote1.start();
                 while (mPlayerNote1.isPlaying()) {
+                    // do nothing
                 }
                 mPlayerNote2.start();
                 while (mPlayerNote2.isPlaying()) {
+                    // do nothing
                 }
-
-//                loadProgress(v);
             }
         });
     }
 
-    public void loadProgress(View view){
-        final int totalProgressTime = 100;
-        final Thread t = new Thread() {
-            @Override
-            public void run() {
-                int jumpTime = 0;
-                boolean finishedPlaying = false;
-                while (jumpTime < totalProgressTime) {
-
-                    try {
-                        mPlayerNote1.start();
-                        while (mPlayerNote1.isPlaying()) {
-                            sleep(200);
-                            jumpTime += 5;
-                            if (!mPlayerNote1.isPlaying())
-                                jumpTime = 50;
-                            sound_progress.setProgress(jumpTime);
-                        }
-                        mPlayerNote2.start();
-                        while (mPlayerNote2.isPlaying()) {
-                            sleep(200);
-                            jumpTime += 5;
-                            if (!mPlayerNote2.isPlaying())
-                                jumpTime = 100;
-                            sound_progress.setProgress(jumpTime);
-                        }
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        t.start();
-    }
     /*
     Index and the interval they correspond in the available_interval array
      0 unison
-     1 octave
-     2 minor 2nd
-     3 major 2nd
-     4 minor 3rd
-     5 major 3rd
-     6 perfect 4th
-     7 tritone
-     8 perfect 5th
-     9 minor 6th
-     10 major 6th
-     11 minor 7th
-     12 major 7th
+     1 minor 2nd
+     2 major 2nd
+     3 minor 3rd
+     4 major 3rd
+     5 perfect 4th
+     6 tritone
+     7 perfect 5th
+     8 minor 6th
+     9 major 6th
+     10 minor 7th
+     11 major 7th
+     12 octave
     */
 
     public void hashSounds() {
@@ -190,7 +155,7 @@ public class GameActivity extends ActionBarActivity {
         mPlayerHash.put(number++, MediaPlayer.create(this, R.raw.g_sharp5));
         mPlayerHash.put(number++, MediaPlayer.create(this, R.raw.a5));
         mPlayerHash.put(number++, MediaPlayer.create(this, R.raw.a_sharp5));
-        mPlayerHash.put(number++, MediaPlayer.create(this, R.raw.b5));
+        mPlayerHash.put(number, MediaPlayer.create(this, R.raw.b5));
     }
 
     public void hashButtons(){
@@ -208,7 +173,7 @@ public class GameActivity extends ActionBarActivity {
         buttonHash.put(number++, major6_button);    // 9 major 6th
         buttonHash.put(number++, minor7_button);    // 10 minor 7th
         buttonHash.put(number++, major7_button);    // 11 major 7th
-        buttonHash.put(number++, octave_button);    // 12 octave
+        buttonHash.put(number, octave_button);    // 12 octave
     }
 
     public void hashButtonTexts(){
@@ -226,7 +191,7 @@ public class GameActivity extends ActionBarActivity {
         buttonTextHash.put(number++, "MAJOR 6TH");      // 9 major 6th
         buttonTextHash.put(number++, "MINOR 7TH");      // 10 minor 7th
         buttonTextHash.put(number++, "MAJOR 7TH");      // 11 major 7th
-        buttonTextHash.put(number++, "OCTAVE");         // 12 octave
+        buttonTextHash.put(number, "OCTAVE");         // 12 octave
     }
 
     public void generateInterval(){
@@ -245,9 +210,7 @@ public class GameActivity extends ActionBarActivity {
         answer_value = secondNote - firstNote;
         //Add code that plays the notes
         mPlayerNote1 = mPlayerHash.get(firstNote);
-        Toast.makeText(getApplicationContext(), firstNote+" Note1", Toast.LENGTH_LONG).show();
         mPlayerNote2 = mPlayerHash.get(secondNote);
-        Toast.makeText(getApplicationContext(), secondNote +" Note2", Toast.LENGTH_LONG).show();
     }
 
     public int GenerateSecondNote(){
@@ -262,26 +225,27 @@ public class GameActivity extends ActionBarActivity {
 
     private void setButtonsVisible(int level){
         rev_ans_button = (Button) findViewById(R.id.rev_ans);
+        setDefaultColor(rev_ans_button);
         rev_ans_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), buttonTextHash.get(answer_value), Toast.LENGTH_LONG).show();
-                processWrongAnswer();
-                processNextRound();
+                reveal_clicked = true;
+                processRevealAnswer();
             }
         });
         if(level >= 0){
             /*************************************
-            * lv1: Unison = 0
-            * 	   Perfect 4th = 5
-            *      Perfect 5th = 7
-            ***************************************/
+             * lv1: Unison = 0
+             * 	   Perfect 4th = 5
+             *      Perfect 5th = 7
+             ***************************************/
             available_interval[0] = true;
             available_interval[5] = true;
             available_interval[7] = true;
 
             unison_button = (Button) findViewById(R.id.unison_button);
             unison_button.setVisibility(View.VISIBLE);
+            unison_button.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
             unison_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -442,35 +406,68 @@ public class GameActivity extends ActionBarActivity {
 
     public void checkAnswer(int button_value, Button button){
         if (button_value == answer_value) {
-            Toast.makeText(getApplicationContext(), "Correct!!", Toast.LENGTH_LONG).show();
-            processCorrectAnswer();
+            if (!reveal_clicked)
+                Toast.makeText(getApplicationContext(), "Correct!!", Toast.LENGTH_LONG).show();
+            processCorrectAnswer(button);
         }
         else {
             Toast.makeText(getApplicationContext(), "WRONG!!!!", Toast.LENGTH_LONG).show();
-            processWrongAnswer();
-//            int wrongAnswer = getResources().getColor(R.color.wrong_answer);
-//            button.setBackgroundColor(wrongAnswer);
+            processWrongAnswer(button);
         }
-//        findAnswerButton();
     }
 
-    public void processCorrectAnswer(){
-        scoreTextView.setText("Score: " + ++correct_num + " / " + ++attempt_num);
+    public void processCorrectAnswer(Button button){
+        if (!reveal_clicked)
+            scoreTextView.setText("Score: " + ++correct_num + " / " + ++attempt_num);
+        button.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
         processNextRound();
     }
 
-    public void processWrongAnswer(){
+    public void processWrongAnswer(Button button){
         scoreTextView.setText("Score: " + correct_num + " / " + ++attempt_num);
+        button.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+    }
+
+    public void setResultColor(Button button){
+        if (button.equals(buttonHash.get(answer_value)))
+            button.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
+        else
+            button.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+    }
+
+    public void setDefaultColor(Button button){
+        int color_value = hex2decimal("#D8D8D8");
+        button.getBackground().setColorFilter(color_value, PorterDuff.Mode.MULTIPLY);
+    }
+
+    public int hex2decimal(String s) {
+        String digits = "0123456789ABCDEF";
+        s = s.toUpperCase();
+        int val = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            int d = digits.indexOf(c);
+            val = 16*val + d;
+        }
+        return val;
+    }
+
+    public void processRevealAnswer(){
+        scoreTextView.setText("Score: " + correct_num + " / " + ++attempt_num);
+        for(Button button: buttonHash.values()){
+            if (button != null)
+                setResultColor(button);
+        }
     }
 
     public void processNextRound(){
         roundTextView.setText("Round " + ++round_num);
+        reveal_clicked = false;
+        for(Button button: buttonHash.values()){
+            if (button != null)
+                setDefaultColor(button);
+        }
         generateInterval();
-    }
-
-    public void findAnswerButton(){
-        int correctAnswer = getResources().getColor(R.color.correct_answer);
-        buttonHash.get(answer_value).setBackgroundColor(correctAnswer);
     }
 
     @Override
