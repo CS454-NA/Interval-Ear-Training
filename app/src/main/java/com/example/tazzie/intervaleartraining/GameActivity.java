@@ -58,7 +58,7 @@ public class GameActivity extends ActionBarActivity {
             correct_num = 0;
             attempt_num = 0;
         }
-        Toast.makeText(getApplicationContext(), level+" GAMEACTIVITY", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),  "Level: " + level, Toast.LENGTH_LONG).show();
         roundTextView = (TextView) findViewById(R.id.round);
         roundTextView.setText("Round " + round_num);
         scoreTextView = (TextView) findViewById(R.id.score);
@@ -406,12 +406,9 @@ public class GameActivity extends ActionBarActivity {
 
     public void checkAnswer(int button_value, Button button){
         if (button_value == answer_value) {
-            if (!reveal_clicked)
-                Toast.makeText(getApplicationContext(), "Correct!!", Toast.LENGTH_LONG).show();
             processCorrectAnswer(button);
         }
         else {
-            Toast.makeText(getApplicationContext(), "WRONG!!!!", Toast.LENGTH_LONG).show();
             processWrongAnswer(button);
         }
     }

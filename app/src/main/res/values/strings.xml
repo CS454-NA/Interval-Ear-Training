@@ -18,10 +18,23 @@
     <string name="major7">Major 7th</string>
     <string name="octave">Octave</string>
     <string name="revealAns">Reveal Answer</string>
+    <string name="mainMenu">Main</string>
 
     <string name="button_1">Start</string>
     <string name="button_2">Practice</string>
     <string name="button_3">Song List</string>
+    <string name="button_4">Song References</string>
     <string name="level_button">Change Difficulty</string>
 
+    <string name="jaws"> - Jaws</string>
+    <string name="silent"> - Silent Night</string>
+    <string name="saints"> - Oh, when the Saints</string>
+    <string name="wedding"> - Wedding march</string>
+    <string name="simpsons"> - Simpsons Theme</string>
+    <string name="star_wars"> - Star Wars</string>
+    <string name="my_life"> - In My Life</string>
+    <string name="my_way"> - My Way</string>
+    <string name="star_trek"> - Star Trek Theme</string>
+    <string name="rainbow"> - Somewhere over &#xA; the Rainbow</string>
+    <string name="title_activity_song">SongActivity</string>
 </resources>

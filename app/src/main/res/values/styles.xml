@@ -12,4 +12,7 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="Songs">
+        <item name="android:textSize">20dp</item>
+    </style>
 </resources>
