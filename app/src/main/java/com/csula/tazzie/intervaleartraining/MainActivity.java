@@ -1,15 +1,12 @@
-package com.example.tazzie.intervaleartraining;
+package com.csula.tazzie.intervaleartraining;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 

@@ -1,4 +1,4 @@
-//package com.example.tazzie.intervaleartraining;
+//package com.csula.tazzie.intervaleartraining;
 //
 //import android.content.Context;
 //import android.content.Intent;

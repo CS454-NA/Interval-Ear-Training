@@ -1,4 +1,4 @@
-package com.example.tazzie.intervaleartraining;
+package com.csula.tazzie.intervaleartraining;
 
 /**
  * Created by Hung on 5/16/2015.
