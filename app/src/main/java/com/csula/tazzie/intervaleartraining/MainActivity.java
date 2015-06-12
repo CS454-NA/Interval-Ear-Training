@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity implements NumberPicker.OnValueChangeListener{
-    private Button start_button, practice_button, song_button;
+    private Button perf_button, start_button, practice_button, song_button;
     private int level;
     private int round_num, correct_num, attempt_num;
 
@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity implements NumberPicker.OnVa
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,GameActivity.class);
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 intent.putExtra("level", level);
                 intent.putExtra("attempt_num", attempt_num);
                 intent.putExtra("correct_num", correct_num);
@@ -81,6 +81,15 @@ public class MainActivity extends ActionBarActivity implements NumberPicker.OnVa
         song_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SongActivity.class);
+                // prevents new stacks of activity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+        });
+        perf_button = (Button) findViewById(R.id.performance_button);
+        perf_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PerformanceActivity.class);
                 // prevents new stacks of activity
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
