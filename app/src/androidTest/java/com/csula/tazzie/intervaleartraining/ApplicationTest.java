@@ -1,4 +1,4 @@
-package com.example.tazzie.intervaleartraining;
+package com.csula.tazzie.intervaleartraining;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Interval Ear Training</string>
+    <string name="app_id">251090595046</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
