@@ -1,4 +1,4 @@
-package com.csula.tazzie.intervaleartraining;
+package com.example.tazzie.intervaleartraining;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
