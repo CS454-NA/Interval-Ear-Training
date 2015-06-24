@@ -24,6 +24,7 @@
     <string name="button_2">Practice</string>
     <string name="button_3">Song List</string>
     <string name="button_4">Song References</string>
+    <string name="button_5">History</string>
     <string name="level_button">Change Difficulty</string>
 
     <string name="jaws"> - Jaws</string>
@@ -36,5 +37,11 @@
     <string name="my_way"> - My Way</string>
     <string name="star_trek"> - Star Trek Theme</string>
     <string name="rainbow"> - Somewhere over &#xA; the Rainbow</string>
+    <string name="average_attempts">Your attempts per question is :</string>
+    <string name="best_range">The interval you recognized most consistently is :</string>
+    <string name="worst">The interval you recognized least consistently is :</string>
+
     <string name="title_activity_song">SongActivity</string>
+
+    <string name="title_activity_performance">PerformanceActivity</string>
 </resources>

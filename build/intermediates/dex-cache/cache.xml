@@ -2,53 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\pre-dexed\debug\classes-29926cde247b5e319e0b344342b633d05c6c2b5a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\pre-dexed\debug\classes-fa02ae9920bdb816a29b1ac4973174caab01006b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Hung\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jar="/home/jbrooks/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-71a53b9e2ea3b600af3a32c122a45f68873e3de1.jar" />
+        <dex dex="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-aa481a2cd7dc61d89dbb46d1d11659a80a2e2c7c.jar" />
     </item>
     <item
-        jar="C:\Users\Hung\Desktop\GitHub\Interval-Ear-Training\Interval-Ear-Training\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\Interval-Ear-Training\Interval-Ear-Training\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-5f58eaa9ca350031c4b0eff1fc3632b8d714953d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\AndroidApps\CS454\IntervalEarTraining\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-0832ae513fbb7e07d25f21d133a55b735d9962e2.jar" />
-    </item>
-    <item
-        jar="C:\Users\Hung\Desktop\GitHub\Interval-Ear-Training\Interval-Ear-Training\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\Interval-Ear-Training\Interval-Ear-Training\app\build\intermediates\pre-dexed\debug\classes-10a1853dbd7d980c201b9bcb32961bc58a284d91.jar" />
-    </item>
-    <item
-        jar="C:\Users\Hung\Desktop\GitHub\Interval-Ear-Training\Interval-Ear-Training\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
+        jar="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\Hung\Desktop\GitHub\Interval-Ear-Training\Interval-Ear-Training\app\build\intermediates\pre-dexed\debug\classes-2f5c2f15eab20472843988f438ea6ed47df53d59.jar" />
+        <dex dex="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/pre-dexed/debug/classes-ad4cfd80df9d4d04e693ffd6e20515b57090d7a6.jar" />
+    </item>
+    <item
+        jar="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-67cb1a458a503fb9ba20d29a9babf260203f7092.jar" />
+    </item>
+    <item
+        jar="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/home/jbrooks/Downloads/Interval-Ear-Training-final/app/build/intermediates/pre-dexed/debug/classes-ca1e29da035ca13f8d440534ecc6ba77bb8cd0a1.jar" />
     </item>
 
 </items>

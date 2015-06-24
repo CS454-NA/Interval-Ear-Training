@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,10 +17,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class GameActivity extends ActionBarActivity {
+
+    private static final String TrackerTag = "TrackerTag";
     private TextView title_page, roundTextView, scoreTextView;
     private Button sound_button, unison_button, minor2_button, major2_button,
             minor3_button, major3_button, perfect4_button, tritone_button,
@@ -33,6 +39,8 @@ public class GameActivity extends ActionBarActivity {
     private int answer_value, round_num, correct_num, attempt_num;
     private boolean[] available_interval = new boolean[max_interval];
     private boolean reveal_clicked = false;
+    protected Question workingQuestion;
+    protected Tracker test;
 
     @Override
     protected void onPause() {
@@ -42,6 +50,7 @@ public class GameActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = this;
+        test=new Tracker();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
         try{
@@ -207,6 +216,7 @@ public class GameActivity extends ActionBarActivity {
         }
 
         answer_value = secondNote - firstNote;
+        workingQuestion=new Question(firstNote,secondNote,answer_value,level);
         //Add code that plays the notes
         mPlayerNote1 = mPlayerHash.get(firstNote);
         mPlayerNote2 = mPlayerHash.get(secondNote);
@@ -416,11 +426,14 @@ public class GameActivity extends ActionBarActivity {
         if (!reveal_clicked)
             scoreTextView.setText("Score: " + ++correct_num + " / " + ++attempt_num);
         button.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
+        test.input(workingQuestion);
+        workingQuestion=null;
         processNextRound();
     }
 
     public void processWrongAnswer(Button button){
-        scoreTextView.setText("Score: " + correct_num + " / " + ++attempt_num);
+        workingQuestion.failedAttempt();
+            scoreTextView.setText("Score: " + correct_num + " / " + ++attempt_num);
         button.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
     }
 
@@ -487,4 +500,106 @@ public class GameActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    class Tracker{
+        ArrayList<Question> questions;
+        SQLiteDatabase mydatabase;
+
+        public Tracker(){
+            questions= new ArrayList<Question>();
+            mydatabase = openOrCreateDatabase("performance",MODE_PRIVATE,null);
+            //TODO remove the drop table command
+//            mydatabase.execSQL("DROP Table history");
+            mydatabase.execSQL("CREATE TABLE IF NOT EXISTS history(StartOfRange INTEGER,EndOfRange INTEGER,CorrectAnswer INTEGER,NumberOfIncorrectAttempts INTEGER,Level INTEGER);");
+        }
+
+       public void input(Question in)
+       {
+           questions.add(in);
+           //Toast.makeText(getApplicationContext(),"James"+ test.toString(), Toast.LENGTH_LONG).show();
+           commit(in);
+           logDb();
+
+       }
+        public void commit(Question in){
+            String insertionStatement="";
+
+
+                insertionStatement="INSERT INTO history VALUES(" +
+                        in.startOfRange +"," +
+                        in.endOfRange +","+
+                        in.correctAnswer +","+
+                        in.incorrectAttempts+","+
+                        in.level+
+                        ");";
+
+                mydatabase.execSQL(insertionStatement);
+
+
+
+        }
+        public void logDb(){
+            Cursor resultSet = mydatabase.rawQuery("Select * from history",null);
+            resultSet.moveToFirst();
+            Log.d(TrackerTag, "dbContent" +resultSet.getCount());
+            while(!resultSet.isAfterLast()) {
+                Log.d(TrackerTag, "dbContent " +  resultSet.getInt(4) + " " +resultSet.getInt(1) + " " + resultSet.getInt(2) + " " + resultSet.getInt(3) + " " + resultSet.getInt(0));
+            resultSet.moveToNext();
+
+            }
+        }
+
+public String toString(){
+    String ret="";
+
+    for(Question q: questions){
+
+        ret+=q.toString()+" \n";
+
+    }
+
+    return ret;
+}
+
+
+    } //TODO loose bracket
+    protected    class Question{
+        int startOfRange;
+        int endOfRange;
+        int correctAnswer;
+        int incorrectAttempts;
+        int level;
+
+
+
+        String uniqueID;
+
+        public Question(int s,int e, int c,int level){
+            Log.d(TrackerTag, "dbContent Question constructor called");
+
+            startOfRange=s;
+            endOfRange=e;
+            correctAnswer=c;
+            incorrectAttempts=0;
+            this.level=level;
+            uniqueID = s+" "+e;
+
+
+        }
+        public void failedAttempt(){
+            incorrectAttempts++;
+        }
+        public String toString(){
+            String ret="";
+
+            ret=startOfRange+" "+endOfRange+" "+correctAnswer+" "+incorrectAttempts;
+
+            return ret;
+        }
+
+    }
+
+
+
+
 }
